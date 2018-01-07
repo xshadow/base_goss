@@ -17,3 +17,8 @@
     dest: "{{ goss_path }}/dgoss"
     mode: 0755
   no_log: yes
+
+- name: "copy goss.yaml to remote"
+  template:
+    src: goss.yaml
+    dest: /root/goss.yaml

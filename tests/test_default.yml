@@ -19,7 +19,8 @@
     - name: Copy tests to remote
       template:
         src: "{{ playbook_dir }}/../templates/goss.yaml"
-        dest: "/tmp/goss.yaml"
+        dest: "/root/goss.yaml"
+      no_log: yes
 
 - name: Execute goss tests
   hosts: all
@@ -37,7 +38,7 @@
 
     - name: Test goss file
       goss:
-        path: "/tmp/goss.yaml"
+        path: "/root/goss.yaml"
         format: documentation
         output_file: "{{ goss_results }}/goss.txt"
 

@@ -1,13 +1,12 @@
 ---
-file:
-  {{ goss_path }}/goss:
-    exists: true
-    owner: root
-    group: root
-    mode: "0755"
-    sha256: "sha256:{{ goss[goss_version].sha256sum }}"
-  {{ goss_path}}/goss:
-    exists: true
-    owner: root
-    group: root
-    mode: "0755"
+/root/goss.yaml:
+  exists: true
+  mode: "0644"
+  owner: root
+  group: root
+  filetype: file
+{{ goss_path}}/goss:
+  exists: true
+  owner: root
+  group: root
+  mode: "0755"
