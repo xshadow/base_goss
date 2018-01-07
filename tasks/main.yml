@@ -22,3 +22,8 @@
   template:
     src: goss.yaml
     dest: /root/goss.yaml
+
+- name: "copy goss.yaml to remote"
+  template:
+    src: goss.yaml
+    dest: /root/test_goss.yaml
