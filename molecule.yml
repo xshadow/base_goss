@@ -6,7 +6,7 @@ driver:
 docker:
   containers:
     - name: ansible-role-install_goss
-      image: centos/systemd
+      image: centos
       image_version: latest
       ansible_groups:
         - group1
