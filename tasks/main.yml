@@ -16,3 +16,4 @@
     src: "dgoss"
     dest: "{{ goss_path }}/dgoss"
     mode: 0755
+  no_log: yes
