@@ -1,7 +1,6 @@
-Role Name
-=========
+![Build Status](https://api.travis-ci.org/dockpack/base_goss.svg)
 
-A simple role to download the goss binary to dir set by {{ goss_path }} and verify the checksum for a given version
+An ansible-role to download the **goss** binary to a dir set by {{ goss_path }}
 
 Requirements
 ------------
