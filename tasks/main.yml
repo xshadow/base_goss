@@ -5,9 +5,17 @@
   when: ansible_os_family == 'Debian'
 
 - name: "get goss binary"
-  become: yes
+  become: no
+  delegate_to: localhost
   get_url:
     url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-amd64"
+    validate_certs: no # for the proxy chain
+    dest: "/tmp/goss"
+    mode: 0755
+
+- name: "copy goss to remote"
+  copy:
+    src: "/tmp/goss"
     dest: "{{ goss_path }}/goss"
     mode: 0755
 

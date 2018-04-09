@@ -5,7 +5,7 @@ driver:
   name: docker
 docker:
   containers:
-    - name: ansible-role-install_goss
+    - name: dockpack_goss
       image: centos
       image_version: latest
       ansible_groups:
