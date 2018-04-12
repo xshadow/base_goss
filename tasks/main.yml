@@ -9,7 +9,7 @@
   delegate_to: localhost
   get_url:
     url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-amd64"
-    validate_certs: no # for the proxy chain
+    validate_certs: no #  for the proxy chain
     dest: "/tmp/goss"
     mode: 0755
 
