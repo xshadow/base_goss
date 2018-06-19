@@ -7,6 +7,8 @@
 - name: "get goss binary"
   become: no
   delegate_to: localhost
+  retries: 5
+  delay: 5
   get_url:
     url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-amd64"
     validate_certs: no  # for the proxy chain
