@@ -1,4 +1,5 @@
-![Build Status](https://api.travis-ci.org/dockpack/base_goss.svg)
+[![Galaxy](https://img.shields.io/badge/galaxy-dockpack.base__goss-blue.svg?style=flat)](https://galaxy.ansible.com/dockpack/base_goss)[![Build Status](https://api.travis-ci.org/dockpack/base_goss.svg)](https://travis-ci.org/dockpack/base_goss)
+
 
 An ansible-role to download the **goss** binary to a dir set by {{ goss_path }}
 
