@@ -23,15 +23,14 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: sean-abbott.install-goss, goss_version: v0.2.5 }
+         - dockpack.base_goss
 
 License
 -------
 
-GPLv2
+MIT
 
 Author Information
 ------------------
-
-Sean's a pretty great guy. I'm not sayin', I'm just sayin'.
-bbaassssiiee uses Ansible a lot.
+bbaassssiiee uses Ansible a lot, this role use used to install goss for integration testing.
+This role  is based on a role by Sean Abott: https://github.com/sean-abbott/ansible-role-install_goss
