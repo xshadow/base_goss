@@ -2,6 +2,10 @@
 - name: Install ca-certificates
   apt:
     name: ca-certificates
+  register: network_access
+  until: network_access is success
+  retries: 10
+  delay: 2
   when: ansible_os_family == 'Debian'
   tags:
     - base_goss
