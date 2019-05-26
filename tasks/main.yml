@@ -13,6 +13,7 @@
 - name: "get goss binary"
   become: no
   delegate_to: localhost
+  check_mode: no
   get_url:
     url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-amd64"
     sha256sum: "{{ goss[goss_version].sha256sum }}"
@@ -27,6 +28,7 @@
     - base_goss
 
 - name: "copy goss to remote"
+  check_mode: no
   copy:
     src: "/tmp/goss"
     dest: "{{ goss_path }}/goss"
@@ -35,6 +37,7 @@
     - base_goss
 
 - name: "copy dgoss to remote"
+  check_mode: no
   copy:
     src: "dgoss"
     dest: "{{ goss_path }}/dgoss"
@@ -66,6 +69,7 @@
 
 
 - name: Execute Goss tests
+  check_mode: no
   command: "{{ goss_dst }} -g /root/goss.yaml validate --format {{ goss_format }}"
   register: test_results
   changed_when: false
