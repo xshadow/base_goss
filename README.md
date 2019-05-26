@@ -4,7 +4,7 @@ base_goss
 ---------
 
 An ansible-role to download the **goss** binary to a dir set by {{ goss_path }}.
-The `validate` tag runs health checks by parsing `/root/test_*.yml` files created by other roles.
+The `validate` tag runs health checks by parsing `{{ goss_test_directory }}/test_*.y*ml` files created by other roles.
 These are used to validate the server/container against specifications.
 
 [http://goss.rocks](http://goss.rocks)
@@ -23,6 +23,7 @@ Role Variables
     goss_dst: /usr/bin/goss
     goss_url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-{{ goss_arch }}"
     goss_test_directory: /root
+    goss_test_directory_mode: 0700
     goss_format: tap
 
 Any new versions of `goss_version` need to be handjammed into `vars/main.yml` because of the manual checksum validation. Currently all known versions are supported.

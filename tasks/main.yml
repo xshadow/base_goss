@@ -43,27 +43,28 @@
   tags:
     - base_goss
 
-- name: "copy test_goss.yml to remote"
+- name: "ensure {{ goss_test_directory }} exists"
+  file:
+    path: "{{ goss_test_directory }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "{{ goss_test_directory_mode }}"
+
+- name: "copy test_goss.yaml to remote"
   template:
-    src: goss.yaml
-    dest: "/root/test_goss.yml"
+    src: test_goss.yaml.j2
+    dest: "{{ goss_test_directory }}/test_goss.yaml"
   tags:
     - base_goss
 
-- name: "verify if /root/goss.yaml exists"
-  stat:
-    path: /root/goss.yaml
-  register: yamlfile
-  tags:
-    - base_goss
-
-- name: "render goss.yaml on remote"
-  script: goss_render.sh
-  when: not yamlfile.stat.exists
+- name: "copy goss.yaml to remote"
+  template:
+    src: goss.yaml.j2
+    dest: "/root/goss.yaml"
   tags:
     - base_goss
     - validate
-
 
 - name: Execute Goss tests
   command: "{{ goss_dst }} -g /root/goss.yaml validate --format {{ goss_format }}"
