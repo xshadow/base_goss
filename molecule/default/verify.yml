@@ -26,7 +26,7 @@
       retries: 3
 
     - name: Copy Goss tests to remote
-      copy:
+      template:
         src: "{{ item }}"
         dest: "{{ goss_test_directory }}/{{ item | basename }}"
       with_fileglob:
