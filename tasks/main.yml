@@ -26,11 +26,21 @@
   tags:
     - base_goss
 
+- name: Ensure we have local copy of goss
+  become: no
+  delegate_to: localhost
+  stat:
+    path: /tmp/goss
+  register: goss_bin
+  tags:
+    - base_goss
+
 - name: "copy goss to remote"
   copy:
     src: "/tmp/goss"
     dest: "{{ goss_path }}/goss"
     mode: 0755
+  when: goss_bin.stat.exists
   tags:
     - base_goss
 
@@ -66,10 +76,21 @@
     - base_goss
     - validate
 
+- name: Ensure we have remote copy of goss
+  stat:
+    path: "{{ goss_dst }}"
+  register: goss_bin_remote
+  tags:
+    - base_goss
+    - validate
+
 - name: Execute Goss tests
   command: "{{ goss_dst }} -g /root/goss.yaml validate --format {{ goss_format }}"
+  when: goss_bin_remote.stat.exists
   register: test_results
   changed_when: false
+  check_mode: false
+  ignore_errors: true
   tags:
     - base_goss
     - validate
