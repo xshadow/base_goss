@@ -60,6 +60,8 @@
     owner: root
     group: root
     mode: "{{ goss_test_directory_mode }}"
+  tags:
+    - base_goss
 
 - name: "copy test_goss.yaml to remote"
   template:
