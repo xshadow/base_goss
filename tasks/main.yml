@@ -39,6 +39,8 @@
   copy:
     src: "/tmp/goss"
     dest: "{{ goss_path }}/goss"
+    owner: root
+    group: root
     mode: 0755
   when: goss_bin.stat.exists
   tags:
