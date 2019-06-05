@@ -9,10 +9,15 @@ lint:
 platforms:
   - name: base-goss-centos7
     image: centos:7
-    privileged: true
+    command: /sbin/init
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: base-goss-centos6
     image: centos:6
-    privileged: true
+    privileged: True
   - name: base-goss-ubuntu
     image: ubuntu
     privileged: True
