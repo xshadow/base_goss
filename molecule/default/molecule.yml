@@ -20,7 +20,12 @@ platforms:
     privileged: True
   - name: base-goss-ubuntu
     image: ubuntu
-    privileged: True
+    command: /sbin/init
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: base-goss-debian9
     image: debian:stretch
     privileged: True
