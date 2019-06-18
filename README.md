@@ -24,6 +24,7 @@ Role Variables
     goss_url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-{{ goss_arch }}"
     goss_test_directory: /root
     goss_test_directory_mode: 0700
+    goss_install_dgoss: false
 
 Any new versions of `goss_version` need to be handjammed into `vars/main.yml` because of the manual checksum validation. Currently all known versions are supported.
 
