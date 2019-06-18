@@ -11,38 +11,17 @@
     - base_goss
 
 - name: "get goss binary"
-  become: no
-  delegate_to: localhost
   get_url:
     url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-amd64"
     sha256sum: "{{ goss[goss_version].sha256sum }}"
-    validate_certs: no  # for the proxy chain
-    dest: "/tmp/goss"
+    dest: "{{ goss_path }}/goss"
+    owner: root
+    group: root
     mode: 0755
   register: network_access
   until: network_access is success
   retries: 10
   delay: 2
-  tags:
-    - base_goss
-
-- name: Ensure we have local copy of goss
-  become: no
-  delegate_to: localhost
-  stat:
-    path: /tmp/goss
-  register: goss_bin
-  tags:
-    - base_goss
-
-- name: "copy goss to remote"
-  copy:
-    src: "/tmp/goss"
-    dest: "{{ goss_path }}/goss"
-    owner: root
-    group: root
-    mode: 0755
-  when: goss_bin.stat.exists
   tags:
     - base_goss
 
@@ -83,7 +62,7 @@
 
 - name: Ensure we have remote copy of goss
   stat:
-    path: "{{ goss_dst }}"
+    path: "{{ goss_path }}/goss"
   register: goss_bin_remote
   tags:
     - base_goss
@@ -91,7 +70,7 @@
 
 - block:
     - name: Execute Goss tests
-      command: "{{ goss_dst }} -g /root/goss.yaml validate --format json"
+      command: "{{ goss_path }}/goss -g /root/goss.yaml validate --format json"
       register: test_results
       changed_when: false
       failed_when: false
