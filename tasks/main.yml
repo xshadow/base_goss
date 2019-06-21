@@ -39,6 +39,8 @@
   copy:
     src: "/tmp/goss"
     dest: "{{ goss_path }}/goss"
+    owner: "{{ goss_user }}"
+    group: "{{ goss_user }}"
     mode: 0755
   when: goss_bin.stat.exists
   tags:
@@ -57,8 +59,8 @@
   file:
     path: "{{ goss_test_directory }}"
     state: directory
-    owner: root
-    group: root
+    owner: "{{ goss_user }}"
+    group: "{{ goss_user }}"
     mode: "{{ goss_test_directory_mode }}"
   tags:
     - base_goss
