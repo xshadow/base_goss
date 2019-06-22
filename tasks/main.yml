@@ -52,6 +52,7 @@
     dest: "{{ goss_path }}/dgoss"
     mode: 0755
   no_log: yes
+  when: goss_install_dgoss|bool
   tags:
     - base_goss
 
