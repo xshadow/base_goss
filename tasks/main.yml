@@ -89,28 +89,24 @@
     - base_goss
     - validate
 
-- name: Execute Goss tests
-  command: "{{ goss_dst }} -g /root/goss.yaml validate --format {{ goss_format }}"
+- block:
+    - name: Execute Goss tests
+      command: "{{ goss_dst }} -g /root/goss.yaml validate --format json"
+      register: test_results
+      changed_when: false
+      failed_when: false
+      check_mode: false
+
+    - name: Show failing Goss tests
+      debug:
+        msg: "Goss test failed"
+      loop: "{{ test_results.stdout | from_json | json_query(query) }}"
+      vars:
+        query: 'results[?successful==`false`]."summary-line"'
+      when: test_results.rc != 0
+      failed_when: test_results.rc != 0
+
   when: goss_bin_remote.stat.exists
-  register: test_results
-  changed_when: false
-  check_mode: false
-  ignore_errors: true
-  tags:
-    - base_goss
-    - validate
-
-- name: Display details about the Goss results
-  debug:
-    msg: "{{ test_results.stdout_lines }}"
-  tags:
-    - base_goss
-    - validate
-
-- name: Fail when tests fail
-  fail:
-    msg: "Goss failed to validate"
-  when: test_results.rc != 0
   tags:
     - base_goss
     - validate

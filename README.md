@@ -12,7 +12,7 @@ These are used to validate the server/container against specifications.
 Requirements
 ------------
 
-Linux machine.
+Linux machine. The machine running ansible must have `python-jmespath` installed.
 
 Role Variables
 --------------
