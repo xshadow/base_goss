@@ -83,7 +83,7 @@
 
 - name: Ensure we have remote copy of goss
   stat:
-    path: "{{ goss_dst }}"
+    path: "{{ goss_path }}/goss"
   register: goss_bin_remote
   tags:
     - base_goss
@@ -91,7 +91,7 @@
 
 - block:
     - name: Execute Goss tests
-      command: "{{ goss_dst }} -g /root/goss.yaml validate --format json"
+      command: "{{ goss_path }}/goss -g /root/goss.yaml validate --format json"
       register: test_results
       changed_when: false
       failed_when: false

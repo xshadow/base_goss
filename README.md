@@ -20,7 +20,6 @@ Role Variables
     goss_version: "v0.3.7"
     goss_path: "/usr/bin/"
     goss_arch: amd64
-    goss_dst: /usr/bin/goss
     goss_url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-{{ goss_arch }}"
     goss_test_directory: /root
     goss_test_directory_mode: 0700
