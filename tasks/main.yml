@@ -45,6 +45,16 @@
   tags:
     - base_goss
 
+- name: "ensure VERSION file exists"
+  template:
+    src: VERSION.j2
+    dest: "{{ goss_test_directory }}/VERSION"
+    owner: root
+    group: root
+    mode: 0755
+  tags:
+    - base_goss
+
 - name: "copy test_goss.yaml to remote"
   template:
     src: test_goss.yaml.j2
